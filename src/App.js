@@ -1,37 +1,73 @@
 // import logo from './logo.svg';
-import './App.css';
+import './App.css'
 import { YMaps, Map, Placemark } from 'react-yandex-maps'
+import React from 'react'
 
-const But = (porps) => {
-  return <button >{porps.value}</button>
+const But = (props) => {
+  return <button onClick={props.onClick}>{props.value}</button>
 }
 
-const MapInstans = (props) => {
-  return <YMaps
-    query={{
-      ns: 'use-load-option',
-      // load: 'geoObject.addon.balloon, \
-      //       control.ZoomControl,\
-      //       control.FullscreenControl, \
-      load: 'package.full'
-    }}>
-      <MapBase p={props}/>
-  </YMaps>
+class MapInstans extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      zoom: (props.zoom) ? props.zoom : 9,
+      center: props.center
+    }
+  }
+
+  upZoom = (zoom) => {
+    this.setState({
+      zoom: (this.state.zoom === 2) ? 12 : 2,
+    })
+    console.log('-----', this.state.zoom)
+  }
+
+  setCenter = (coord) => {
+    this.setState({
+      center: coord,
+    })
+  }
+
+  setEvents = (event) => {
+    let ret
+    switch(event) {
+      case 'zoom': ret = () => this.upZoom(); break;
+      case 'center': ret = () => this.setCenter([34, 56]); break;
+      default: ret = () => this.upZoom()
+    }
+    return ret
+  }
+
+  render() {
+    return <YMaps
+      query={{
+        ns: 'use-load-option',
+        // load: 'geoObject.addon.balloon, \
+        //       control.ZoomControl,\
+        //       control.FullscreenControl, \
+        load: 'package.full'
+      }}>
+        <MapBase zoom={this.state.zoom} center={this.state.center}/>
+        <But value={this.props.button} onClick={this.setEvents(this.props.button)}/>
+        <p>{this.state.zoom}</p>
+    </YMaps>
+  }
 }
 
 const MapBase = (props) => {
-  return <Map defaultState={{
-    center: props.p.center,
-    zoom: (props.p.zoom) ? props.p.zoom : 10,
+  return <Map state={{
+    center: props.center,
+    zoom: props.zoom,
     controls: ['zoomControl', 'fullscreenControl'],
   }}>
-    <Pmark dot={props.p.center}/>
+    <Pmark dot={props.center}/>
   </Map>
 }
 
 const Pmark = (props) => {
   return <Placemark
-      defaultGeometry={props.dot}
+      geometry={props.dot}
       properties={{ balloonContentBody: "this is just text" }}
     />
 }
@@ -41,12 +77,10 @@ function App() {
     <div className="App">
       <header className="App-header">
         <div className='item'>
-          <MapInstans center={[11.6, 43.15]} zoom={12}/>
-          <But value="button11"/>
+          <MapInstans center={[11.6, 43.15]} zoom={15} button={'zoom'}/>
         </div>
         <div className='item'>
-          <MapInstans center={[55, 43]}/>
-          <But value="button2"/>
+          <MapInstans center={[55, 37]} button={'center'}/>
         </div>
       </header>
     </div>
