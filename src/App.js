@@ -48,7 +48,7 @@ class MapInstans extends React.Component {
         //       control.FullscreenControl, \
         load: 'package.full'
       }}>
-        <MapBase zoom={this.state.zoom} center={this.state.center}/>
+        <MapBase zoom={this.state.zoom} center={this.state.center} width={this.props.width}/>
         <But value={this.props.button} onClick={this.setEvents(this.props.button)}/>
         <p>{this.state.zoom}</p>
     </YMaps>
@@ -60,7 +60,9 @@ const MapBase = (props) => {
     center: props.center,
     zoom: props.zoom,
     controls: ['zoomControl', 'fullscreenControl'],
-  }}>
+  }}
+  width={props.width}
+  >
     <Pmark dot={props.center}/>
   </Map>
 }
@@ -77,10 +79,15 @@ function App() {
     <div className="App">
       <header className="App-header">
         <div className='item'>
-          <MapInstans center={[11.6, 43.15]} zoom={15} button={'zoom'}/>
+          <MapInstans
+            center={[11.6, 43.15]}
+            zoom={15}
+            button={'zoom'}
+            width={500}
+          />
         </div>
         <div className='item'>
-          <MapInstans center={[55, 37]} button={'center'}/>
+          <MapInstans center={[55, 37]} button={'center'} width={400}/>
         </div>
       </header>
     </div>
