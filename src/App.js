@@ -56,6 +56,14 @@ class MapInstans extends React.Component {
 }
 
 const MapBase = (props) => {
+  const handleClick = (e) => {
+    const myMap = e.originalEvent.map
+    console.log(e)
+    myMap.setType('yandex#hybrid')
+    // myMap.setCenter([5.7, 37.6], 6)
+    myMap.panTo([5.7, 37.6], {duration: 2500})
+    myMap.balloon.open([5.7, 37.6], {contentHeader:'a hint'})
+  }
   return <Map state={{
     center: props.center,
     zoom: props.zoom,
@@ -63,14 +71,16 @@ const MapBase = (props) => {
   }}
   width={props.width}
   >
-    <Pmark dot={props.center}/>
+    <Pmark dot={props.center} onClick={(e) => handleClick(e)}/>
   </Map>
 }
 
 const Pmark = (props) => {
   return <Placemark
       geometry={props.dot}
-      properties={{ balloonContentBody: "this is just text" }}
+      properties={{ balloonContentBody: "this is just text",
+                    draggable: true}}
+      onClick={props.onClick}
     />
 }
 
