@@ -59,10 +59,19 @@ const MapBase = (props) => {
   const handleClick = (e) => {
     const myMap = e.originalEvent.map
     console.log(e)
-    myMap.setType('yandex#hybrid')
+    myMap.setType('yandex#map')
     // myMap.setCenter([5.7, 37.6], 6)
-    myMap.panTo([5.7, 37.6], {duration: 2500})
-    myMap.balloon.open([5.7, 37.6], {contentHeader:'a hint'})
+    // myMap.panTo([5.7, 37.6], {duration: 2500})
+    // myMap.balloon.open([5.7, 37.6])
+    // console.log(myMap.getCenter())
+    const target = e.originalEvent.target
+    const iter = myMap.geoObjects.getIterator()
+    console.log(myMap.geoObjects.indexOf(iter.getNext()))
+    // console.log(target.geoObjects.get(0).properties.getAll())
+    // myMap.geoObjects.get(0).properties.setAll({balloonContentBody: 'text'})
+    console.log(target.geoObjects.get(0))
+    // console.log('line 67', myMap.geoObjects.remove(myMap.geoObjects.get(0)))
+    console.log(myMap.geoObjects.getLength())
   }
   return <Map state={{
     center: props.center,
@@ -70,17 +79,31 @@ const MapBase = (props) => {
     controls: ['zoomControl', 'fullscreenControl'],
   }}
   width={props.width}
+  onClick={(e) => handleClick(e)}
   >
     <Pmark dot={props.center} onClick={(e) => handleClick(e)}/>
+    <Pmark dot={[55, 37.2]} onClick={(e) => handleClick(e)}/>
   </Map>
 }
 
 const Pmark = (props) => {
+  const handleClick = (e) => {
+    const p = e.originalEvent.target
+    const m = e.originalEvent.map
+    console.log('======', p)
+    // e.originalEvent.map.setType('yandex#hybrid')
+    // const dot = e.originalEvent.map.geoObjects
+    // dot.remove(dot.get(0))
+    console.log(m.geoObjects.indexOf(p))
+    m.geoObjects.remove(p)
+  }
+
   return <Placemark
       geometry={props.dot}
       properties={{ balloonContentBody: "this is just text",
                     draggable: true}}
-      onClick={props.onClick}
+      // onClick={props.onClick}
+      onClick={(e) => handleClick(e)}
     />
 }
 
