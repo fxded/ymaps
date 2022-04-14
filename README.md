@@ -1,6 +1,17 @@
 # Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).  
+[rove label](https://renotes.ru/post-126/api-maps-drag-placemark)  
+[placemarks](https://snipp.ru/jquery/yamaps-balloon#link-primery)  
+[remove placemark](https://ru.stackoverflow.com/questions/434624/Как-удалить-метку-из-коллекции-в-Яндекс-Карте)  
+[remove coord](https://qna.habr.com/q/827603)  
+[move plcmark](http://fkn.ktu10.com/?q=node/7720)  
+[yandex api examples](https://codd-wd.ru/shpargalka-yandeks-karty-yandex-maps-api/)  
+[remove plcmark](https://qna.habr.com/q/259830)  
+[yandex sandbox](https://yandex.ru/dev/maps/jsbox/2.1/object_manager_spatial)  
+[sandbox2](https://yandex.com/dev/maps/jsapi/doc/2.1/dg/concepts/geoquery.html)  
+[map react](https://react-yandex-maps.vercel.app/migration#geometry-prop)  
+
 
 ## Available Scripts
 
