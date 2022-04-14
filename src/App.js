@@ -72,6 +72,8 @@ const MapBase = (props) => {
     console.log(target.geoObjects.get(0))
     // console.log('line 67', myMap.geoObjects.remove(myMap.geoObjects.get(0)))
     console.log(myMap.geoObjects.getLength())
+    console.log(e)
+    console.log(e.get('coords'))
   }
   return <Map state={{
     center: props.center,
