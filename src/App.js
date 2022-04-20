@@ -56,6 +56,7 @@ class MapInstans extends React.Component {
 }
 
 const MapBase = (props) => {
+  const pmarks = []
   const handleClick = (e) => {
     const myMap = e.originalEvent.map
     console.log(e)
@@ -64,24 +65,25 @@ const MapBase = (props) => {
     // myMap.panTo([5.7, 37.6], {duration: 2500})
     // myMap.balloon.open([5.7, 37.6])
     // console.log(myMap.getCenter())
-    const target = e.originalEvent.target
-    const iter = myMap.geoObjects.getIterator()
-    console.log(myMap.geoObjects.indexOf(iter.getNext()))
+    // const target = e.originalEvent.target
+    // const iter = myMap.geoObjects.getIterator()
+    // console.log(myMap.geoObjects.indexOf(iter.getNext()))
     // console.log(target.geoObjects.get(0).properties.getAll())
     // myMap.geoObjects.get(0).properties.setAll({balloonContentBody: 'text'})
-    console.log(target.geoObjects.get(0))
+    // console.log(target.geoObjects.get(0))
     // console.log('line 67', myMap.geoObjects.remove(myMap.geoObjects.get(0)))
-    console.log(myMap.geoObjects.getLength())
-    console.log(e)
+    // console.log(myMap.geoObjects.getLength())
     console.log(e.get('coords'))
   }
-  return <Map state={{
-    center: props.center,
-    zoom: props.zoom,
-    controls: ['zoomControl', 'fullscreenControl'],
-  }}
-  width={props.width}
-  onClick={(e) => handleClick(e)}
+
+  return <Map 
+    state={{
+      center: props.center,
+      zoom: props.zoom,
+      controls: ['zoomControl', 'fullscreenControl'],
+    }}
+    width={props.width}
+    onClick={(e) => handleClick(e)}
   >
     <Pmark dot={props.center} onClick={(e) => handleClick(e)}/>
     <Pmark dot={[55, 37.2]} onClick={(e) => handleClick(e)}/>
